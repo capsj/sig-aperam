@@ -12,17 +12,17 @@ import org.springframework.web.servlet.ModelAndView;
 public class BobinaController {
 
     @Autowired
-    BobinaRepository repository;
+    BobinaRepository bobinaRepository;
 
-    @PostMapping(value = "/bobina")
+    @PostMapping(value = "/api/bobina")
     public ResponseEntity saveBobina(@RequestBody Bobina bobina)
     {
-        return ResponseEntity.ok(repository.save(bobina));
+        return ResponseEntity.ok(bobinaRepository.save(bobina));
     }
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/api/bobina/id/{id}")
     public ResponseEntity<Bobina> findById(@PathVariable("id") Long id) {
-        return repository.findById(id).map(bobina -> ResponseEntity.ok(bobina)).orElseGet(() -> ResponseEntity.notFound().build());
+        return bobinaRepository.findById(id).map(bobina -> ResponseEntity.ok(bobina)).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 }
