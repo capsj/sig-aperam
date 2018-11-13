@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders="*")
 public class BobinaController {
@@ -15,14 +17,19 @@ public class BobinaController {
     BobinaRepository bobinaRepository;
 
     @PostMapping(value = "/api/bobina")
-    public ResponseEntity saveBobina(@RequestBody Bobina bobina)
+    public ResponseEntity saveBobina(@RequestBody CrearBobina bobina)
     {
-        return ResponseEntity.ok(bobinaRepository.save(bobina));
+        return ResponseEntity.ok(bobinaRepository.save(new Bobina(bobina)));
     }
 
     @GetMapping("/api/bobina/id/{id}")
     public ResponseEntity<Bobina> findById(@PathVariable("id") Long id) {
         return bobinaRepository.findById(id).map(bobina -> ResponseEntity.ok(bobina)).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/api/bobina/compra/{id}")
+    public ResponseEntity<List<Bobina>> findByOrdenDeComporaId(@PathVariable("id") Long id) {
+        return ResponseEntity.ok(bobinaRepository.findByOrdenDeCompraId(id));
     }
 
     @PutMapping(value = "/api/bobina")

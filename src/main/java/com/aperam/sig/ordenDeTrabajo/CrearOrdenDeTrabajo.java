@@ -14,12 +14,11 @@ public class CrearOrdenDeTrabajo {
     private Estado estado;
     private Date fechaDespacho;
     private Producto producto;
-    private Long bobinaId;
 
     public CrearOrdenDeTrabajo() {}
 
     public CrearOrdenDeTrabajo(String serieSolicitada, Double espesorSolicitado, Double anchoSolicitado, Double largoSolicitado,
-                               String esmerilado, Double cantidad, Date fechaDespacho, Producto producto, Long bobinaId) {
+                               String esmerilado, Double cantidad, Date fechaDespacho, Producto producto) {
         this.serieSolicitada = serieSolicitada;
         this.espesorSolicitado = espesorSolicitado;
         this.anchoSolicitado = anchoSolicitado;
@@ -28,7 +27,6 @@ public class CrearOrdenDeTrabajo {
         this.cantidad = cantidad;
         this.estado = Estado.PENDIENTE;
         this.producto = producto;
-        this.bobinaId = bobinaId;
         this.fecha = new Date();
         this.fechaDespacho = fechaDespacho;
     }
@@ -72,9 +70,5 @@ public class CrearOrdenDeTrabajo {
 
     public Producto getProducto() {
         return producto;
-    }
-
-    public Long getBobinaId() {
-        return bobinaId;
     }
 }

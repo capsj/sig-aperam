@@ -23,11 +23,11 @@ public class OrdenDeTrabajoController {
     @PostMapping(value = "/api/orden/trabajo")
     public ResponseEntity saveOrdenDeTrabajo(@RequestBody CrearOrdenDeTrabajo crearOrdenDeTrabajo)
     {
-        Optional<ResponseEntity> response = bobinaRepository.findById(crearOrdenDeTrabajo.getBobinaId()).map(bobina -> {
-            return ResponseEntity.ok(ordenDeTrabajoRepository.save(new OrdenDeTrabajo(crearOrdenDeTrabajo, bobina)));
-        });
-        return response.orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Bobina not found"));
+        return ResponseEntity.ok(ordenDeTrabajoRepository.save(new OrdenDeTrabajo(crearOrdenDeTrabajo)));
     }
+//        Optional<ResponseEntity> response = bobinaRepository.findById(crearOrdenDeTrabajo.getBobinaId()).map(bobina -> {
+//        });
+//        return response.orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("Bobina not found"));
 
     @GetMapping("/api/orden/trabajo/id/{id}")
     public ResponseEntity<OrdenDeTrabajo> findById(@PathVariable("id") Long id) {

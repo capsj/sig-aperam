@@ -41,7 +41,7 @@ public class OrdenDeTrabajo {
 
     public OrdenDeTrabajo() {}
 
-    public OrdenDeTrabajo(CrearOrdenDeTrabajo crearOrdenDeTrabajo, Bobina bobina) {
+    public OrdenDeTrabajo(CrearOrdenDeTrabajo crearOrdenDeTrabajo) {
         this.serieSolicitada = crearOrdenDeTrabajo.getSerieSolicitada();
         this.espesorSolicitado = crearOrdenDeTrabajo.getEspesorSolicitado();
         this.anchoSolicitado = crearOrdenDeTrabajo.getAnchoSolicitado();
@@ -52,7 +52,7 @@ public class OrdenDeTrabajo {
         this.producto = crearOrdenDeTrabajo.getProducto();
         this.fecha = new Date();
         this.fechaDespacho = crearOrdenDeTrabajo.getFechaDespacho();
-        this.bobina = bobina;
+        this.bobina = null;
     }
 
     public Long getId() {

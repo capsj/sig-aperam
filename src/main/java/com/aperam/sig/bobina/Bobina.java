@@ -39,6 +39,19 @@ public class Bobina {
 
     public Bobina() { }
 
+    public Bobina(CrearBobina crearBobina) {
+        this.codigo = RandomString.make(6);
+        this.serie = crearBobina.getSerie();
+        this.ancho = crearBobina.getAncho();
+        this.espesor = crearBobina.getEspesor();
+        this.pesoTotal = crearBobina.getPeso();
+        this.largo = crearBobina.getLargo();
+        this.aptitudInicial = false;
+        this.aptitudFinal = false;
+        this.estadoProductivo = EstadoProductivo.PENDIENTE_CONTROL;
+        this.ordenDeCompraId = crearBobina.getOrdenDeCompraId();
+    }
+
     public Bobina(OrdenDeCompra ordenDeCompra) {
         this.codigo = RandomString.make(6);
         this.serie = ordenDeCompra.getSerie();
