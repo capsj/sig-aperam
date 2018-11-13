@@ -25,4 +25,11 @@ public class BobinaController {
         return bobinaRepository.findById(id).map(bobina -> ResponseEntity.ok(bobina)).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PutMapping(value = "/api/bobina")
+    public ResponseEntity updateBobina(@RequestBody Bobina bobina)
+    {
+        return ResponseEntity.ok(bobinaRepository.save(bobina));
+    }
+
+
 }

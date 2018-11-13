@@ -1,5 +1,7 @@
 package com.aperam.sig.ordenDeTrabajo;
 
+import com.aperam.sig.bobina.Bobina;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -26,27 +28,32 @@ public class OrdenDeTrabajo {
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
+    @Enumerated
     @Column(name = "estado")
-    private String estado;
+    private Estado estado;
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaDespacho;
+    @Enumerated
+    @Column(name = "producto")
+    private Producto producto;
+    @ManyToOne
+    private Bobina bobina;
 
     public OrdenDeTrabajo() {}
 
-    public OrdenDeTrabajo(Long id, String serieSolicitada, Double espesorSolicitado, Double anchoSolicitado, Double largoSolicitado,
-                          String esmerilado, Double cantidad, String estado, Date fechaDespacho) {
-        this.id = id;
-        this.serieSolicitada = serieSolicitada;
-        this.espesorSolicitado = espesorSolicitado;
-        this.anchoSolicitado = anchoSolicitado;
-        this.largoSolicitado = largoSolicitado;
-        this.esmerilado = esmerilado;
-        this.cantidad = cantidad;
-        this.estado = estado;
+    public OrdenDeTrabajo(CrearOrdenDeTrabajo crearOrdenDeTrabajo, Bobina bobina) {
+        this.serieSolicitada = crearOrdenDeTrabajo.getSerieSolicitada();
+        this.espesorSolicitado = crearOrdenDeTrabajo.getEspesorSolicitado();
+        this.anchoSolicitado = crearOrdenDeTrabajo.getAnchoSolicitado();
+        this.largoSolicitado = crearOrdenDeTrabajo.getLargoSolicitado();
+        this.esmerilado = crearOrdenDeTrabajo.getEsmerilado();
+        this.cantidad = crearOrdenDeTrabajo.getCantidad();
+        this.estado = crearOrdenDeTrabajo.getEstado();
+        this.producto = crearOrdenDeTrabajo.getProducto();
         this.fecha = new Date();
-        this.fechaDespacho = fechaDespacho;
+        this.fechaDespacho = crearOrdenDeTrabajo.getFechaDespacho();
+        this.bobina = bobina;
     }
-
 
     public Long getId() {
         return id;
@@ -80,11 +87,19 @@ public class OrdenDeTrabajo {
         return fecha;
     }
 
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
     public Date getFechaDespacho() {
         return fechaDespacho;
+    }
+
+    public Producto getProducto() {
+        return producto;
+    }
+
+    public Bobina getBobina() {
+        return bobina;
     }
 }

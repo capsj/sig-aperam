@@ -34,6 +34,8 @@ public class Bobina {
     private EstadoProductivo estadoProductivo;
     @Column(name = "orden_compra")
     private Long ordenDeCompraId;
+    @Column(name = "comentario")
+    private String comentario;
 
     public Bobina() { }
 
@@ -50,13 +52,14 @@ public class Bobina {
         this.ordenDeCompraId = ordenDeCompra.getId();
     }
 
-    public Bobina(String codigo, String serie, Double ancho, Double espesor, Double pesoTotal, Double largo) {
+    public Bobina(String codigo, String serie, Double ancho, Double espesor, Double pesoTotal, Double largo, String comentario) {
         this.codigo = codigo;
         this.serie = serie;
         this.ancho = ancho;
         this.espesor = espesor;
         this.pesoTotal = pesoTotal;
         this.largo = largo;
+        this.comentario = comentario;
         this.aptitudInicial = false;
         this.aptitudFinal = false;
         this.estadoProductivo = EstadoProductivo.PENDIENTE_CONTROL;
@@ -108,5 +111,9 @@ public class Bobina {
 
     public Long getOrdenDeCompraId() {
         return ordenDeCompraId;
+    }
+
+    public String getComentario() {
+        return comentario;
     }
 }
