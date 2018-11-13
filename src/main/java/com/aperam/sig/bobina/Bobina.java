@@ -1,5 +1,8 @@
 package com.aperam.sig.bobina;
 
+import com.aperam.sig.ordenDeCompra.OrdenDeCompra;
+import net.bytebuddy.utility.RandomString;
+
 import javax.persistence.*;
 
 @Entity
@@ -23,23 +26,40 @@ public class Bobina {
     @Column(name = "largo")
     private Double largo;
     @Column(name = "aptitud_inicial")
-    private Double aptitudInicial;
+    private boolean aptitudInicial;
     @Column(name = "aptitud_final")
-    private Double aptitudFinal;
+    private boolean aptitudFinal;
+    @Enumerated
+    @Column(name = "estado_productivo")
+    private EstadoProductivo estadoProductivo;
+    @Column(name = "orden_compra")
+    private Long ordenDeCompraId;
 
-    public Bobina() {
+    public Bobina() { }
 
+    public Bobina(OrdenDeCompra ordenDeCompra) {
+        this.codigo = RandomString.make(6);
+        this.serie = ordenDeCompra.getSerie();
+        this.ancho = ordenDeCompra.getAncho();
+        this.espesor = ordenDeCompra.getEspesor();
+        this.pesoTotal = ordenDeCompra.getPeso();
+        this.largo = 0.0;
+        this.aptitudInicial = false;
+        this.aptitudFinal = false;
+        this.estadoProductivo = EstadoProductivo.PENDIENTE_CONTROL;
+        this.ordenDeCompraId = ordenDeCompra.getId();
     }
 
-    public Bobina(String codigo, String serie, Double ancho, Double espesor, Double pesoTotal, Double largo, Double aptitudInicial, Double aptitudFinal) {
+    public Bobina(String codigo, String serie, Double ancho, Double espesor, Double pesoTotal, Double largo) {
         this.codigo = codigo;
         this.serie = serie;
         this.ancho = ancho;
         this.espesor = espesor;
         this.pesoTotal = pesoTotal;
         this.largo = largo;
-        this.aptitudInicial = aptitudInicial;
-        this.aptitudFinal = aptitudFinal;
+        this.aptitudInicial = false;
+        this.aptitudFinal = false;
+        this.estadoProductivo = EstadoProductivo.PENDIENTE_CONTROL;
     }
 
     public Long getId() {
@@ -70,11 +90,23 @@ public class Bobina {
         return largo;
     }
 
-    public Double getAptitudFinal() {
+    public boolean getAptitudFinal() {
         return aptitudFinal;
     }
 
-    public Double getAptitudInicial() {
+    public boolean getAptitudInicial() {
         return aptitudInicial;
+    }
+
+    public EstadoProductivo getEstadoProductivo() {
+        return estadoProductivo;
+    }
+
+    public void setEstadoProductivo(EstadoProductivo estadoProductivo) {
+        this.estadoProductivo = estadoProductivo;
+    }
+
+    public Long getOrdenDeCompraId() {
+        return ordenDeCompraId;
     }
 }
