@@ -49,5 +49,4 @@ public class BobinaController {
         return ResponseEntity.ok(bobinaRepository.save(bobina));
     }
 
-
 }
