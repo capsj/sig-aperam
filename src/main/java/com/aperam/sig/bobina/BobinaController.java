@@ -1,5 +1,6 @@
 package com.aperam.sig.bobina;
 
+import com.aperam.sig.ordenDeTrabajo.Estado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -30,6 +33,14 @@ public class BobinaController {
     @GetMapping("/api/bobina/compra/{id}")
     public ResponseEntity<List<Bobina>> findByOrdenDeComporaId(@PathVariable("id") Long id) {
         return ResponseEntity.ok(bobinaRepository.findByOrdenDeCompraId(id));
+    }
+
+    @GetMapping("/api/bobina/correct")
+    public ResponseEntity<List<Bobina>> findCorrect() {
+        return ResponseEntity.ok(bobinaRepository.findCorrectByEstadoProductivo(new ArrayList<EstadoProductivo>(Arrays.asList(
+                EstadoProductivo.PENDIENTE_CONTROL,
+                EstadoProductivo.RETRABAJO
+        ))));
     }
 
     @PutMapping(value = "/api/bobina")

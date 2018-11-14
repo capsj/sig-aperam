@@ -11,6 +11,6 @@ import java.util.Optional;
 @Repository("ordenDeTrabajoRepository")
 public interface OrdenDeTrabajoRepository extends JpaRepository<OrdenDeTrabajo, Long> {
     Optional<OrdenDeTrabajo> findById(@Param("id") Long id);
-    List<OrdenDeTrabajo> findByProducto(Producto producto);
+    List<OrdenDeTrabajo> findByProductoAndEstado(Producto producto, Estado estado);
     List<OrdenDeTrabajo> findByEstado(Estado estado);
 }

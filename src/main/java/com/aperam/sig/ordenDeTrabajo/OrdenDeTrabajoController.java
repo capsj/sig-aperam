@@ -39,9 +39,9 @@ public class OrdenDeTrabajoController {
         return ResponseEntity.ok(ordenDeTrabajoRepository.findAll());
     }
 
-    @GetMapping("/api/orden/trabajo/{producto}")
+    @GetMapping("/api/orden/trabajo/producto/{producto}")
     public ResponseEntity<List<OrdenDeTrabajo>> findByProducto(@PathVariable("producto") Producto producto) {
-        return ResponseEntity.ok(ordenDeTrabajoRepository.findByProducto(producto));
+        return ResponseEntity.ok(ordenDeTrabajoRepository.findByProductoAndEstado(producto, Estado.EN_PROCESO));
     }
 
     @GetMapping("/api/orden/trabajo/{estado}")
